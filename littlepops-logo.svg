@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 610" role="img" aria-labelledby="title desc">
+<title>LittlePops — Wholesome by nature</title>
+<desc>LittlePops logo in green with a leaf inside the O and the tagline Wholesome by nature.</desc>
+<g fill="#5b8f20" font-family="Arial Rounded MT Bold, Arial Black, Arial, sans-serif" font-weight="900" letter-spacing="-7">
+  <text x="35" y="265" font-size="235">little</text>
+  <text x="35" y="500" font-size="235">POPS</text>
+</g>
+<!-- leaf motif inside the O -->
+<path d="M316 330 C355 352 371 397 343 438 C321 410 304 374 316 330 Z" fill="#f8f2dc"/>
+<path d="M329 430 C331 391 341 367 356 350" fill="none" stroke="#5b8f20" stroke-width="8" stroke-linecap="round"/>
+<text x="35" y="575" font-family="Arial, Helvetica, sans-serif" font-size="48" font-weight="500" fill="#222">Wholesome by nature</text>
+</svg>
