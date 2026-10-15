@@ -89,9 +89,6 @@ body{padding-top:94px}
 <main>
 <section class="section wrap" id="recipes">
 <div class="section-head"><div><div class="kicker">Find your favourite</div><h2>Something tasty for every mood.</h2><p class="muted">Choose a category, then open a recipe for ingredients and instructions.</p></div></div>
-<div class="filters" aria-label="Filter recipes">
-<button class="filter active" data-filter="all" type="button">All recipes</button><button class="filter" data-filter="savoury" type="button">Savoury</button><button class="filter" data-filter="sweet" type="button">Sweet</button><button class="filter" data-filter="quick" type="button">Quick snacks</button>
-</div>
 <div class="grid">
 <article class="recipe" data-category="savoury quick"><div class="recipe-art"><div><div class="food">🥣</div><span class="art-label">Everyday favourite</span></div></div><div class="recipe-body"><div class="meta"><span class="pill">10 min</span><span class="pill">Easy</span></div><h3>Classic Ghee &amp; Pepper Makhana</h3><p>A simple, buttery crunch with salt and freshly cracked black pepper.</p><details><summary>View recipe</summary><h4>Ingredients</h4><ul><li>2 cups raw LittlePops makhana</li><li>1–2 tsp ghee</li><li>Salt, to taste</li><li>¼ tsp black pepper, or to taste</li></ul><h4>Method</h4><ol><li>Warm a heavy pan on low-medium heat.</li><li>Dry-roast makhana for 5–8 minutes, stirring often, until crisp.</li><li>Add ghee and toss for another minute.</li><li>Season with salt and pepper. Cool briefly before serving.</li></ol></details></div></article>
 <article class="recipe" data-category="savoury quick"><div class="recipe-art"><div><div class="food">🌶️</div><span class="art-label">A little heat</span></div></div><div class="recipe-body"><div class="meta"><span class="pill">10 min</span><span class="pill">Easy</span></div><h3>Peri-Peri Makhana</h3><p>A spicy, tangy snack for movie nights and afternoon cravings.</p><details><summary>View recipe</summary><h4>Ingredients</h4><ul><li>2 cups raw makhana</li><li>1 tsp oil or ghee</li><li>½–1 tsp peri-peri seasoning</li><li>A pinch of salt, if needed</li></ul><h4>Method</h4><ol><li>Dry-roast makhana over low-medium heat for 5–8 minutes until crisp.</li><li>Add oil or ghee and toss to coat lightly.</li><li>Turn off the heat, add peri-peri seasoning and mix well.</li><li>Let cool before storing in an airtight container.</li></ol></details></div></article>
@@ -118,17 +115,6 @@ body{padding-top:94px}
 </div>
 </div></section>
 
-<script>
-const filterButtons = document.querySelectorAll('[data-filter]');
-const recipes = document.querySelectorAll('.recipe');
-filterButtons.forEach(button => button.addEventListener('click', () => {
-  const selected = button.dataset.filter;
-  filterButtons.forEach(item => item.classList.toggle('active', item === button));
-  recipes.forEach(recipe => {
-    const categories = recipe.dataset.category.split(' ');
-    recipe.hidden = selected !== 'all' && !categories.includes(selected);
-  });
-}));
-</script>
+
 </body>
 </html>
