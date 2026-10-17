@@ -233,17 +233,30 @@ document.addEventListener('click', function(e) {
   const status = document.getElementById("store-finder-status");
   const results = document.getElementById("store-finder-results");
   const geoCache = {};
+  const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+  let lastGeocodeAt = 0;
   async function geocode(query, isPostal) {
     const cacheKey = (isPostal ? "postal:" : "address:") + query;
     if (geoCache[cacheKey]) return geoCache[cacheKey];
-    // Use OpenStreetMap's public Nominatim geocoder; OneMap's Search API now requires an API token.
+    // Respect the public Nominatim service's rate limit by making requests one at a time.
+    const wait = Math.max(0, 1100 - (Date.now() - lastGeocodeAt));
+    if (wait) await delay(wait);
     const params = isPostal
-      ? "postalcode=" + encodeURIComponent(query) + "&country=Singapore"
-      : "q=" + encodeURIComponent(query + ", Singapore");
+      ? "postalcode=" + encodeURIComponent(query) + "&country=Singapore&countrycodes=sg"
+      : "q=" + encodeURIComponent(query + ", Singapore") + "&countrycodes=sg";
     const url = "https://nominatim.openstreetmap.org/search?" + params + "&format=jsonv2&limit=1";
+    lastGeocodeAt = Date.now();
     const response = await fetch(url, {headers:{"Accept":"application/json"}});
-    if (!response.ok) throw new Error("Location lookup failed");
-    const data = await response.json();
+    if (!response.ok) throw new Error("Location lookup failed (" + response.status + ")");
+    let data = await response.json();
+    // Some Singapore postal codes aren't indexed as structured postcodes in OSM; retry as a text query.
+    if ((!data || !data.length) && isPostal) {
+      await delay(Math.max(0, 1100 - (Date.now() - lastGeocodeAt)));
+      lastGeocodeAt = Date.now();
+      const fallback = await fetch("https://nominatim.openstreetmap.org/search?q=" + encodeURIComponent(query + ", Singapore") + "&countrycodes=sg&format=jsonv2&limit=1", {headers:{"Accept":"application/json"}});
+      if (!fallback.ok) throw new Error("Postal code lookup failed (" + fallback.status + ")");
+      data = await fallback.json();
+    }
     const found = data && data[0];
     if (!found || !found.lat || !found.lon) throw new Error("Location not found");
     geoCache[cacheKey] = {lat:Number(found.lat),lon:Number(found.lon)};
@@ -271,13 +284,12 @@ document.addEventListener('click', function(e) {
     status.textContent = "Finding nearby stores…";
     results.innerHTML = "";
     try {
-      const [customer, storeCoords] = await Promise.all([
-        geocode(postal, true),
-        Promise.all(stores.map(async store => {
-          try { return {store, point:await geocode(store.address, false)}; }
-          catch (_) { return null; }
-        }))
-      ]);
+      const customer = await geocode(postal, true);
+      const storeCoords = [];
+      for (const store of stores) {
+        try { storeCoords.push({store, point:await geocode(store.address, false)}); }
+        catch (_) { /* Skip stores that cannot be geocoded; continue with the others. */ }
+      }
       const nearby = storeCoords.filter(Boolean).map(({store,point}) => ({...store,km:distanceKm(customer,point)})).sort((a,b)=>a.km-b.km).slice(0,4);
       if (!nearby.length) throw new Error("No store locations available");
       status.textContent = "Nearest LittlePops stockists for postal code " + postal + ":";
