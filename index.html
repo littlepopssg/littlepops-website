@@ -241,23 +241,27 @@ document.addEventListener('click', function(e) {
     // Respect the public Nominatim service's rate limit by making requests one at a time.
     const wait = Math.max(0, 1100 - (Date.now() - lastGeocodeAt));
     if (wait) await delay(wait);
-    const params = isPostal
-      ? "postalcode=" + encodeURIComponent(query) + "&country=Singapore&countrycodes=sg"
-      : "q=" + encodeURIComponent(query + ", Singapore") + "&countrycodes=sg";
-    const url = "https://nominatim.openstreetmap.org/search?" + params + "&format=jsonv2&limit=1";
-    lastGeocodeAt = Date.now();
-    const response = await fetch(url, {headers:{"Accept":"application/json"}});
-    if (!response.ok) throw new Error("Location lookup failed (" + response.status + ")");
-    let data = await response.json();
-    // Some Singapore postal codes aren't indexed as structured postcodes in OSM; retry as a text query.
-    if ((!data || !data.length) && isPostal) {
-      await delay(Math.max(0, 1100 - (Date.now() - lastGeocodeAt)));
+    // For Singapore, postal-code lookups can return a broad or mismatched result.
+    // Search the exact code as text first, then use the structured postcode search as fallback.
+    const urls = isPostal
+      ? [
+          "https://nominatim.openstreetmap.org/search?q=" + encodeURIComponent(query + ", Singapore") + "&countrycodes=sg&format=jsonv2&limit=5",
+          "https://nominatim.openstreetmap.org/search?postalcode=" + encodeURIComponent(query) + "&country=Singapore&countrycodes=sg&format=jsonv2&limit=5"
+        ]
+      : ["https://nominatim.openstreetmap.org/search?q=" + encodeURIComponent(query + ", Singapore") + "&countrycodes=sg&format=jsonv2&limit=1"];
+    let data = [];
+    for (const url of urls) {
+      const wait = Math.max(0, 1100 - (Date.now() - lastGeocodeAt));
+      if (wait) await delay(wait);
       lastGeocodeAt = Date.now();
-      const fallback = await fetch("https://nominatim.openstreetmap.org/search?q=" + encodeURIComponent(query + ", Singapore") + "&countrycodes=sg&format=jsonv2&limit=1", {headers:{"Accept":"application/json"}});
-      if (!fallback.ok) throw new Error("Postal code lookup failed (" + fallback.status + ")");
-      data = await fallback.json();
+      const response = await fetch(url, {headers:{"Accept":"application/json"}});
+      if (!response.ok) throw new Error("Location lookup failed (" + response.status + ")");
+      const candidates = await response.json();
+      if (candidates && candidates.length) { data = candidates; break; }
     }
-    const found = data && data[0];
+    const found = isPostal
+      ? (data.find(x => (x.display_name || "").includes(query)) || data[0])
+      : data[0];
     if (!found || !found.lat || !found.lon) throw new Error("Location not found");
     geoCache[cacheKey] = {lat:Number(found.lat),lon:Number(found.lon)};
     return geoCache[cacheKey];
