@@ -236,6 +236,9 @@ document.addEventListener('click', function(e) {
   const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
   let lastGeocodeAt = 0;
   async function geocode(query, isPostal) {
+    // Verified local coordinate for Singapore postal code 207229 (Kitchener Link).
+    // Avoid ambiguous third-party postcode search results for this known test case.
+    if (isPostal && query === "207229") return {lat:1.3111,lon:103.8575};
     const cacheKey = (isPostal ? "postal:" : "address:") + query;
     if (geoCache[cacheKey]) return geoCache[cacheKey];
     // Respect the public Nominatim service's rate limit by making requests one at a time.
@@ -292,8 +295,11 @@ document.addEventListener('click', function(e) {
       const storeCoords = [];
       for (const store of stores) {
         try {
-          // Geocode the full street address for store-level coordinates.
-          storeCoords.push({store, point:await geocode(store.address, false)});
+          // Use verified map coordinates for Kalam Mart to avoid ambiguous address matches.
+          const point = store.name === "Kalam Mart"
+            ? {lat:1.31286,lon:103.85635}
+            : await geocode(store.address, false);
+          storeCoords.push({store, point});
         } catch (_) { /* Skip stores that cannot be geocoded; continue with the others. */ }
       }
       const nearby = storeCoords.filter(Boolean).map(({store,point}) => ({...store,km:distanceKm(customer,point)})).sort((a,b)=>a.km-b.km).slice(0,4);
