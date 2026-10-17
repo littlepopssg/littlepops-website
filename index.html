@@ -287,8 +287,10 @@ document.addEventListener('click', function(e) {
       const customer = await geocode(postal, true);
       const storeCoords = [];
       for (const store of stores) {
-        try { storeCoords.push({store, point:await geocode(store.address, false)}); }
-        catch (_) { /* Skip stores that cannot be geocoded; continue with the others. */ }
+        try {
+          // Use each store's verified postal code, not a fuzzy street-address match.
+          storeCoords.push({store, point:await geocode(store.postal, true)});
+        } catch (_) { /* Skip stores that cannot be geocoded; continue with the others. */ }
       }
       const nearby = storeCoords.filter(Boolean).map(({store,point}) => ({...store,km:distanceKm(customer,point)})).sort((a,b)=>a.km-b.km).slice(0,4);
       if (!nearby.length) throw new Error("No store locations available");
