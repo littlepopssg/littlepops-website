@@ -233,16 +233,21 @@ document.addEventListener('click', function(e) {
   const status = document.getElementById("store-finder-status");
   const results = document.getElementById("store-finder-results");
   const geoCache = {};
-  async function geocode(postal) {
-    if (geoCache[postal]) return geoCache[postal];
-    const url = "https://www.onemap.gov.sg/api/common/elastic/search?searchVal=" + encodeURIComponent(postal) + "&returnGeom=Y&getAddrDetails=Y&pageNum=1";
-    const response = await fetch(url);
+  async function geocode(query, isPostal) {
+    const cacheKey = (isPostal ? "postal:" : "address:") + query;
+    if (geoCache[cacheKey]) return geoCache[cacheKey];
+    // Use OpenStreetMap's public Nominatim geocoder; OneMap's Search API now requires an API token.
+    const params = isPostal
+      ? "postalcode=" + encodeURIComponent(query) + "&country=Singapore"
+      : "q=" + encodeURIComponent(query + ", Singapore");
+    const url = "https://nominatim.openstreetmap.org/search?" + params + "&format=jsonv2&limit=1";
+    const response = await fetch(url, {headers:{"Accept":"application/json"}});
     if (!response.ok) throw new Error("Location lookup failed");
     const data = await response.json();
-    const found = (data.results || []).find(x => x.LATITUDE && x.LONGITUDE);
-    if (!found) throw new Error("Postal code not found");
-    geoCache[postal] = {lat:Number(found.LATITUDE),lon:Number(found.LONGITUDE)};
-    return geoCache[postal];
+    const found = data && data[0];
+    if (!found || !found.lat || !found.lon) throw new Error("Location not found");
+    geoCache[cacheKey] = {lat:Number(found.lat),lon:Number(found.lon)};
+    return geoCache[cacheKey];
   }
   function distanceKm(a,b) {
     const rad = n => n * Math.PI / 180;
@@ -267,10 +272,14 @@ document.addEventListener('click', function(e) {
     results.innerHTML = "";
     try {
       const [customer, storeCoords] = await Promise.all([
-        geocode(postal),
-        Promise.all(stores.map(async store => ({store, point:await geocode(store.postal)})))
+        geocode(postal, true),
+        Promise.all(stores.map(async store => {
+          try { return {store, point:await geocode(store.address, false)}; }
+          catch (_) { return null; }
+        }))
       ]);
-      const nearby = storeCoords.map(({store,point}) => ({...store,km:distanceKm(customer,point)})).sort((a,b)=>a.km-b.km).slice(0,4);
+      const nearby = storeCoords.filter(Boolean).map(({store,point}) => ({...store,km:distanceKm(customer,point)})).sort((a,b)=>a.km-b.km).slice(0,4);
+      if (!nearby.length) throw new Error("No store locations available");
       status.textContent = "Nearest LittlePops stockists for postal code " + postal + ":";
       results.innerHTML = nearby.map(store => {
         const mapUrl = "https://www.google.com/maps/dir/?api=1&destination=" + encodeURIComponent(store.address);
@@ -280,7 +289,7 @@ document.addEventListener('click', function(e) {
           '<a href="' + mapUrl + '" target="_blank" rel="noopener" style="color:var(--g);font-weight:800;font-size:13px">Get Directions ↗</a></div>';
       }).join("");
     } catch (err) {
-      status.textContent = "Sorry, we couldn’t look up that postal code right now. Please check the code and try again.";
+      status.textContent = "We couldn’t find that postal code or store locations just now. Please try again in a moment.";
     } finally {
       button.disabled = false;
       button.style.opacity = "1";
