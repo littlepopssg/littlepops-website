@@ -160,50 +160,20 @@ h4,h5,h6{font-size:18px!important;line-height:1.3!important;font-weight:700!impo
 </header>
 
 <section id="retail-stores" class="compact-section" style="padding-top:28px;padding-bottom:30px">
-  <div class="inner">
+  <div class="inner" style="max-width:900px">
     <div style="text-align:center;margin-bottom:22px">
       <div class="kicker">Find us in store</div>
-      <h2 style="margin:6px 0 8px">LittlePops is now available at retail stores!</h2>
-      <p style="color:var(--m);margin:0">Pick up your 200g pack of LittlePops Raw Makhana at these stores.</p>
+      <h2 style="margin:6px 0 8px">Find LittlePops Near You</h2>
+      <p style="color:var(--m);margin:0">Enter your Singapore postal code to find the nearest stores stocking LittlePops Raw Makhana.</p>
     </div>
-    <div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;max-width:1100px;margin:0 auto">
-      <div class="card" style="text-align:center;padding:16px">
-        <div class="icon" aria-hidden="true" style="font-size:22px">📍</div><h3 style="font-size:19px!important;margin:6px 0">Kalam Mart</h3>
-        <p style="font-size:13px;margin:6px 0 10px">432 Serangoon Road,<br>Singapore 218130</p>
-        <a href="https://www.google.com/maps/search/?api=1&query=Kalam+Mart+432+Serangoon+Road+Singapore" target="_blank" rel="noopener" style="color:var(--g);font-weight:800;font-size:13px">Get Directions ↗</a>
-      </div>
-      <div class="card" style="text-align:center;padding:16px">
-        <div class="icon" aria-hidden="true" style="font-size:22px">📍</div><h3 style="font-size:19px!important;margin:6px 0">Evergreen Mart</h3>
-        <p style="font-size:13px;margin:6px 0 10px">180 Depot Road,<br>Singapore 109684</p>
-        <a href="https://www.google.com/maps/search/?api=1&query=Evergreen+Mart+180+Depot+Road+Singapore" target="_blank" rel="noopener" style="color:var(--g);font-weight:800;font-size:13px">Get Directions ↗</a>
-      </div>
-      <div class="card" style="text-align:center;padding:16px">
-        <div class="icon" aria-hidden="true" style="font-size:22px">📍</div><h3 style="font-size:19px!important;margin:6px 0">Nirja Fresh</h3>
-        <p style="font-size:13px;margin:6px 0 10px">85 Syed Alwi Road, Gate 5,<br>opposite Mustafa Centre,<br>Singapore 207664</p>
-        <a href="https://www.google.com/maps/search/?api=1&query=Nirja+Fresh+85+Syed+Alwi+Road+Singapore" target="_blank" rel="noopener" style="color:var(--g);font-weight:800;font-size:13px">Get Directions ↗</a>
-      </div>
-      <div class="card" style="text-align:center;padding:16px">
-        <div class="icon" aria-hidden="true" style="font-size:22px">📍</div><h3 style="font-size:19px!important;margin:6px 0">Goodluck Spicemart</h3>
-        <p style="font-size:13px;margin:6px 0 10px">52 Buffalo Road,<br>Singapore 219800</p>
-        <a href="https://www.google.com/maps/search/?api=1&query=Goodluck+Spicemart+52+Buffalo+Road+Singapore" target="_blank" rel="noopener" style="color:var(--g);font-weight:800;font-size:13px">Get Directions ↗</a>
-      </div>
-      <div class="card" style="text-align:center;padding:16px">
-        <div class="icon" aria-hidden="true" style="font-size:22px">📍</div><h3 style="font-size:19px!important;margin:6px 0">Bharath Supermarket</h3>
-        <a href="https://www.google.com/maps/search/?api=1&query=Bharath+Supermarket+Singapore" target="_blank" rel="noopener" style="color:var(--g);font-weight:800;font-size:13px">Get Directions ↗</a>
-      </div>
-      <div class="card" style="text-align:center;padding:16px">
-        <div class="icon" aria-hidden="true" style="font-size:22px">📍</div><h3 style="font-size:19px!important;margin:6px 0">Avighna</h3>
-        <a href="https://www.google.com/maps/search/?api=1&query=Avighna+Singapore+grocery+store" target="_blank" rel="noopener" style="color:var(--g);font-weight:800;font-size:13px">Get Directions ↗</a>
-      </div>
-      <div class="card" style="text-align:center;padding:16px">
-        <div class="icon" aria-hidden="true" style="font-size:22px">📍</div><h3 style="font-size:19px!important;margin:6px 0">Green Mart</h3>
-        <a href="https://www.google.com/maps/search/?api=1&query=Green+Mart+Singapore" target="_blank" rel="noopener" style="color:var(--g);font-weight:800;font-size:13px">Get Directions ↗</a>
-      </div>
-      <div class="card" style="text-align:center;padding:16px">
-        <div class="icon" aria-hidden="true" style="font-size:22px">📍</div><h3 style="font-size:19px!important;margin:6px 0">Makena's Minimart</h3>
-        <a href="https://www.google.com/maps/search/?api=1&query=Makena%27s+Minimart+Singapore" target="_blank" rel="noopener" style="color:var(--g);font-weight:800;font-size:13px">Get Directions ↗</a>
-      </div>
-    </div>
+    <form id="store-finder-form" style="display:flex;gap:10px;max-width:540px;margin:0 auto 14px;flex-wrap:wrap;justify-content:center">
+      <label for="store-postal-code" style="position:absolute;left:-9999px">Singapore postal code</label>
+      <input id="store-postal-code" name="postal-code" inputmode="numeric" autocomplete="postal-code" maxlength="6" pattern="[0-9]{6}" placeholder="Enter 6-digit postal code" required style="flex:1;min-width:190px;padding:13px 16px;border:1px solid #d8d2be;border-radius:12px;background:white;color:var(--d);font:inherit">
+      <button type="submit" id="store-finder-button" class="btn" style="border:0;cursor:pointer;margin:0">Find nearby stores</button>
+    </form>
+    <p style="font-size:12px;color:var(--m);text-align:center;margin:0 0 18px">Distances are approximate straight-line distances, not travel distances.</p>
+    <div id="store-finder-status" role="status" aria-live="polite" style="text-align:center;color:var(--m);margin:10px 0"></div>
+    <div id="store-finder-results" class="cards" style="grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;max-width:900px;margin:0 auto"></div>
   </div>
 </section>
 
@@ -243,4 +213,80 @@ document.addEventListener('click', function(e) {
   });
 });
 </script>
+
+<script>
+(function(){
+  const stores = [
+    {name:"Kalam Mart",postal:"218130",address:"432 Serangoon Road, Singapore 218130"},
+    {name:"Evergreen Mart",postal:"109684",address:"180 Depot Road, Singapore 109684"},
+    {name:"Nirja Fresh",postal:"207664",address:"85 Syed Alwi Road, Gate 5, Singapore 207664"},
+    {name:"Goodluck Spicemart",postal:"219800",address:"52 Buffalo Road, Singapore 219800"},
+    {name:"Bharath Supermarket",postal:"437153",address:"242F Tanjong Katong Road, Singapore 437153"},
+    {name:"Avighna",postal:"437097",address:"314 Tanjong Katong Road, Singapore 437097"},
+    {name:"Green Mart",postal:"437101",address:"322 Tanjong Katong Road, Singapore 437101"},
+    {name:"Makena's Minimart",postal:"437932",address:"121 Meyer Road, Singapore 437932"}
+  ];
+  const form = document.getElementById("store-finder-form");
+  if (!form) return;
+  const input = document.getElementById("store-postal-code");
+  const button = document.getElementById("store-finder-button");
+  const status = document.getElementById("store-finder-status");
+  const results = document.getElementById("store-finder-results");
+  const geoCache = {};
+  async function geocode(postal) {
+    if (geoCache[postal]) return geoCache[postal];
+    const url = "https://www.onemap.gov.sg/api/common/elastic/search?searchVal=" + encodeURIComponent(postal) + "&returnGeom=Y&getAddrDetails=Y&pageNum=1";
+    const response = await fetch(url);
+    if (!response.ok) throw new Error("Location lookup failed");
+    const data = await response.json();
+    const found = (data.results || []).find(x => x.LATITUDE && x.LONGITUDE);
+    if (!found) throw new Error("Postal code not found");
+    geoCache[postal] = {lat:Number(found.LATITUDE),lon:Number(found.LONGITUDE)};
+    return geoCache[postal];
+  }
+  function distanceKm(a,b) {
+    const rad = n => n * Math.PI / 180;
+    const dLat = rad(b.lat-a.lat), dLon = rad(b.lon-a.lon);
+    const q = Math.sin(dLat/2)**2 + Math.cos(rad(a.lat))*Math.cos(rad(b.lat))*Math.sin(dLon/2)**2;
+    return 6371 * 2 * Math.atan2(Math.sqrt(q),Math.sqrt(1-q));
+  }
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  }
+  form.addEventListener("submit", async function(e) {
+    e.preventDefault();
+    const postal = input.value.trim();
+    if (!/^\d{6}$/.test(postal)) {
+      status.textContent = "Please enter a valid 6-digit Singapore postal code.";
+      results.innerHTML = "";
+      return;
+    }
+    button.disabled = true;
+    button.style.opacity = ".65";
+    status.textContent = "Finding nearby stores…";
+    results.innerHTML = "";
+    try {
+      const [customer, storeCoords] = await Promise.all([
+        geocode(postal),
+        Promise.all(stores.map(async store => ({store, point:await geocode(store.postal)})))
+      ]);
+      const nearby = storeCoords.map(({store,point}) => ({...store,km:distanceKm(customer,point)})).sort((a,b)=>a.km-b.km).slice(0,4);
+      status.textContent = "Nearest LittlePops stockists for postal code " + postal + ":";
+      results.innerHTML = nearby.map(store => {
+        const mapUrl = "https://www.google.com/maps/dir/?api=1&destination=" + encodeURIComponent(store.address);
+        return '<div class="card" style="padding:16px;text-align:left">' +
+          '<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px"><h3 style="font-size:18px!important;margin:2px 0 8px">' + esc(store.name) + '</h3><span style="white-space:nowrap;background:#edf4df;color:var(--g);padding:4px 7px;border-radius:999px;font-size:12px;font-weight:800">' + store.km.toFixed(1) + ' km</span></div>' +
+          '<p style="font-size:13px;margin:0 0 12px">' + esc(store.address) + '</p>' +
+          '<a href="' + mapUrl + '" target="_blank" rel="noopener" style="color:var(--g);font-weight:800;font-size:13px">Get Directions ↗</a></div>';
+      }).join("");
+    } catch (err) {
+      status.textContent = "Sorry, we couldn’t look up that postal code right now. Please check the code and try again.";
+    } finally {
+      button.disabled = false;
+      button.style.opacity = "1";
+    }
+  });
+})();
+</script>
+
 </body></html>
