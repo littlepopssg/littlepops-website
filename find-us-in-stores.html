@@ -60,8 +60,8 @@ nav{position:fixed;inset:0 0 auto;width:100%;background:#f8f2dcf5;border-bottom:
   navigator.geolocation.getCurrentPosition(function(pos){
    const lat=pos.coords.latitude,lon=pos.coords.longitude;
    const ranked=cards.map(card=>({card,d:distanceKm(lat,lon,Number(card.dataset.lat),Number(card.dataset.lng))})).sort((a,b)=>a.d-b.d);
-   ranked.forEach(({card,d})=>{let label=card.querySelector('.distance');if(!label){label=document.createElement('span');label.className='distance';card.querySelector('h2').insertAdjacentElement('afterend',label);}label.textContent='About '+d.toFixed(1)+' km away (straight-line distance)';list.appendChild(card);});
-   status.textContent='Sorted by approximate distance from your location. Distances are straight-line estimates, not travel distances.';
+   ranked.forEach(({card,d})=>{let label=card.querySelector('.distance');if(!label){label=document.createElement('span');label.className='distance';card.querySelector('h2').insertAdjacentElement('afterend',label);}label.textContent='About '+d.toFixed(1)+' km away';list.appendChild(card);});
+   status.textContent='Stores sorted by approximate distance from your location.';
   },function(err){status.textContent=err.code===1?'Location access was denied. Allow location access in your browser to sort by distance.':'Could not get your location. Please try again or use the store directions.';},{enableHighAccuracy:true,timeout:10000,maximumAge:300000});
  });
  document.getElementById('sort-default').addEventListener('click',function(){originalOrder.forEach(card=>{list.appendChild(card);const d=card.querySelector('.distance');if(d)d.remove();});status.textContent='Showing all 10 stores in the original order.';});
