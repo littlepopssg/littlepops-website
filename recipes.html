@@ -91,24 +91,30 @@ h3{font-size:22px!important;line-height:1.25!important;font-weight:700!important
 h4,h5,h6{font-size:18px!important;line-height:1.3!important;font-weight:700!important}
 
 
-/* Compact recipe cards: show all six across on desktop */
-@media(min-width:1100px){
-  .recipes-page #recipes .grid{grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
-  .recipes-page #recipes .recipe{border-radius:15px}
-  .recipes-page #recipes .recipe-art{height:112px;padding:10px}
-  .recipes-page #recipes .recipe-art .food{font-size:34px}
-  .recipes-page #recipes .recipe-art .art-label{font-size:8px;letter-spacing:1px;margin-top:5px}
-  .recipes-page #recipes .recipe-body{padding:12px;gap:7px}
-  .recipes-page #recipes .recipe .meta{gap:4px}
-  .recipes-page #recipes .recipe .pill{font-size:9px;padding:3px 6px}
-  .recipes-page #recipes .recipe h3{font-size:14px!important;line-height:1.25!important;letter-spacing:0!important}
-  .recipes-page #recipes .recipe p{font-size:11px;line-height:1.4}
-  .recipes-page #recipes .recipe summary{font-size:12px}
-  .recipes-page #recipes .recipe details ul,
-  .recipes-page #recipes .recipe details ol{font-size:11px;padding-left:15px}
+/* Horizontal recipe cards: image on the left, details on the right */
+.recipes-page #recipes .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.recipes-page #recipes .recipe{display:grid;grid-template-columns:112px minmax(0,1fr);align-items:stretch;border-radius:18px}
+.recipes-page #recipes .recipe-art{height:100%;min-height:150px;padding:10px;flex-direction:column}
+.recipes-page #recipes .recipe-art .food{font-size:36px}
+.recipes-page #recipes .recipe-art .art-label{font-size:8px;letter-spacing:1px;margin-top:6px;text-align:center}
+.recipes-page #recipes .recipe-body{padding:15px;gap:8px;min-width:0}
+.recipes-page #recipes .recipe h3{font-size:17px!important;line-height:1.25!important;letter-spacing:0!important}
+.recipes-page #recipes .recipe p{font-size:12px;line-height:1.45}
+.recipes-page #recipes .recipe .pill{font-size:10px;padding:4px 7px}
+.recipes-page #recipes .recipe summary{font-size:13px}
+.recipes-page #recipes .recipe details ul,
+.recipes-page #recipes .recipe details ol{font-size:12px;padding-left:17px}
+@media(max-width:800px){
+  .recipes-page #recipes .grid{grid-template-columns:1fr;gap:13px}
+  .recipes-page #recipes .recipe{grid-template-columns:100px minmax(0,1fr)}
+  .recipes-page #recipes .recipe-art{min-height:140px}
+  .recipes-page #recipes .recipe-body{padding:13px}
 }
-@media(min-width:801px) and (max-width:1099px){
-  .recipes-page #recipes .grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media(max-width:420px){
+  .recipes-page #recipes .recipe{grid-template-columns:82px minmax(0,1fr)}
+  .recipes-page #recipes .recipe-art .food{font-size:29px}
+  .recipes-page #recipes .recipe-art .art-label{font-size:7px;letter-spacing:.5px}
+  .recipes-page #recipes .recipe-body{padding:11px}
 }
 
 </style>
