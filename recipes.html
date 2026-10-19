@@ -178,13 +178,31 @@ body.recipes-page #recipes > .grid > .recipe > .recipe-body{min-width:0!importan
   min-width: 0;
   min-height: 0;
 }
-.recipes-page #recipes .recipe-art img {
-  display: block;
+/* Override the older important padding rule so the image reaches every edge */
+body.recipes-page #recipes > .grid > .recipe > .recipe-art {
+  position: relative !important;
+  display: block !important;
+  box-sizing: border-box !important;
   width: 100% !important;
   height: 100% !important;
-  min-height: 100%;
+  min-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  background: transparent !important;
+}
+body.recipes-page #recipes > .grid > .recipe > .recipe-art > img {
+  position: absolute !important;
+  inset: 0 !important;
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
   object-fit: cover !important;
-  object-position: center;
+  object-position: center !important;
+  padding: 0 !important;
+  margin: 0 !important;
   border: 0 !important;
   border-radius: 0 !important;
 }
