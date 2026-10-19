@@ -170,8 +170,24 @@ body.recipes-page #recipes > .grid > .recipe > .recipe-body{min-width:0!importan
 .social-cta a.social-icon.lazada-icon,.home-footer-cta a.social-icon.lazada-icon{width:58px!important;height:58px!important;min-width:58px!important;min-height:58px!important;padding:0!important;border:0!important;outline:0!important;box-shadow:none!important;border-radius:50%!important;background:#ff6600!important;overflow:hidden!important;}
 .social-cta a.social-icon.lazada-icon img,.home-footer-cta a.social-icon.lazada-icon img{width:58px!important;height:58px!important;max-width:none!important;max-height:none!important;object-fit:fill!important;display:block!important;border:0!important;border-radius:50%!important;}
 
-.recipe-art { overflow: hidden; }
-.recipe-art img { display:block; width:100%; height:100%; object-fit:cover; border-radius:inherit; }
+/* Recipe photos fill the entire image panel edge-to-edge */
+.recipes-page #recipes .recipe-art {
+  padding: 0 !important;
+  overflow: hidden !important;
+  align-self: stretch;
+  min-width: 0;
+  min-height: 0;
+}
+.recipes-page #recipes .recipe-art img {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 100%;
+  object-fit: cover !important;
+  object-position: center;
+  border: 0 !important;
+  border-radius: 0 !important;
+}
 </style>
 </head>
 <body class="recipes-page">
