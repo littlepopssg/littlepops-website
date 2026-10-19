@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Lazada">
-  <path d="M32 17 48 27 32 37 16 27z" fill="#FF2A9D"/>
-  <path d="M16 27 32 37v18L16 45z" fill="#FF7A00"/>
-  <path d="M48 27 32 37v18l16-10z" fill="#FF0054"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 139 114" role="img" aria-label="Lazada">
+  <rect width="139" height="114" fill="#ff6600"/>
+  <path d="M48 31 58 25 69 31 80 25 98 36 98 49 69 66 48 49Z" fill="#000"/>
+  <text x="69.5" y="94" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700" fill="#000">Lazada</text>
 </svg>
