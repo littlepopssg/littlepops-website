@@ -101,19 +101,20 @@ h4,h5,h6{font-size:18px!important;line-height:1.3!important;font-weight:700!impo
 .home-footer-cta .contact-details h3{margin:0 0 8px!important;font-size:24px!important}
 .home-footer-cta .contact-details a{color:#fff!important;text-decoration:underline!important}
 
-/* Makhana Reads content merged into this guide */
-.reading-section{margin-top:36px}
-.reading-section>p{color:var(--m);margin-top:-6px}
-.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-.card{background:#fff;border:1px solid #eee8d9;border-radius:18px;padding:21px;display:flex;flex-direction:column;align-items:flex-start}
-.tag{font-size:11px;text-transform:uppercase;letter-spacing:1.2px;font-weight:800;color:var(--g);margin-bottom:8px}
-.card h3{font-size:19px;line-height:1.3;margin:0 0 8px}
-.card p{font-size:14px;color:var(--m);margin:0 0 14px}
-.card a{font-weight:800;margin-top:auto}
-.card a:hover{text-decoration:underline}
+/* Makhana Reads — restore the original compact editorial card layout */
+#makhana-reads{margin-bottom:22px}
+.reading-section{margin-top:30px}
+.reading-section>p{color:var(--m);margin-top:-6px;margin-bottom:16px}
+.reading-section .cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-items:stretch}
+.reading-section .card{background:#fff;border:1px solid #eee8d9;border-radius:18px;padding:20px;display:flex;flex-direction:column;align-items:flex-start;min-width:0;box-shadow:none}
+.reading-section .tag{font-size:11px;text-transform:uppercase;letter-spacing:1.2px;font-weight:800;color:var(--g);margin-bottom:8px}
+.reading-section .card h3{font-size:19px!important;line-height:1.3!important;letter-spacing:0!important;margin:0 0 8px}
+.reading-section .card p{font-size:14px;line-height:1.55;color:var(--m);margin:0 0 14px}
+.reading-section .card a{font-weight:800;margin-top:auto;color:var(--g)}
+.reading-section .card a:hover{text-decoration:underline}
 .note{font-size:13px;color:var(--m);background:#fff;border-radius:14px;padding:16px 18px;margin-top:28px}
 .reading-intro{color:var(--m);max-width:820px;margin:0 0 24px}
-@media(max-width:520px){.cards{grid-template-columns:1fr}}
+@media(max-width:700px){.reading-section .cards{grid-template-columns:1fr;gap:12px}.reading-section .card{padding:18px}}
 
 
 /* Site-wide heading size reduction */
