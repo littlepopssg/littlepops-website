@@ -179,6 +179,18 @@ body main section.reading-section article.card a {
   body main section.reading-section .cards { grid-template-columns: 1fr !important; }
 }
 
+
+/* Make external reading links visibly clickable */
+.card a {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 </style>
 </head>
 <body>
