@@ -26,7 +26,7 @@ h1{font-size:clamp(42px,6vw,66px);line-height:1.03;letter-spacing:-2px;margin:14
 .lead{font-size:21px;color:var(--m);max-width:1080px;width:100%;margin:0 0 32px}.guide-panel{background:white;border-radius:26px;padding:clamp(24px,5vw,44px);margin-top:24px}.guide-panel p,.guide-panel li{font-size:17px;color:var(--m)}.guide-panel p:last-child{margin-bottom:0}.guide-panel ul{padding-left:24px}.guide-panel li{margin:8px 0}
 .btn{display:inline-block;background:var(--g);color:white;padding:12px 22px;border-radius:999px;font-weight:800;margin-top:12px}
 .home-footer-cta{background:var(--d);color:white;text-align:center;padding:44px 24px}.home-footer-cta p{color:#dce5d1}.home-footer-cta .inner{max-width:1120px;margin:auto}
-.home-footer-cta .social-cta{display:flex;justify-content:center;gap:18px;margin-top:8px;flex-wrap:wrap}.home-footer-cta .social-icon{width:58px;height:58px;border-radius:50%!important;display:inline-flex;align-items:center;justify-content:center;background:white;color:var(--g);border:2px solid var(--g);font-size:27px;font-weight:900;text-decoration:none;transition:transform .2s,opacity .2s}.home-footer-cta .social-icon.shopee-icon{border-color:#ee4d2d}.home-footer-cta .social-icon.lazada-icon{border-color:#ff5a5f}.home-footer-cta .social-icon img{width:42px;height:42px;display:block;object-fit:contain}.social-icon svg{display:block!important;width:40px!important;height:40px!important;min-width:40px;min-height:40px;overflow:visible}.social-icon.facebook-icon span{display:block!important;font-size:48px!important;font-weight:800!important;line-height:1!important;transform:translate(-2px,0);font-family:Arial,Helvetica,sans-serif}.home-footer-cta .instagram-icon{background:linear-gradient(35deg,#ffd600 0%,#ff7a00 24%,#ff0069 52%,#d300c5 72%,#7638fa 88%,#405de6 100%);border-color:transparent;color:white;border-radius:22%.home-footer-cta .facebook-icon{background:linear-gradient(180deg,#20a4f4 0%,#0866ff 100%);border-color:transparent;color:white;border-radius:22%}.home-footer-cta .social-icon:hover{transform:translateY(-2px);opacity:.85}
+.home-footer-cta .social-cta{display:flex;justify-content:center;gap:18px;margin-top:8px;flex-wrap:wrap}.home-footer-cta .social-icon{width:58px;height:58px;border-radius:50%!important;display:inline-flex;align-items:center;justify-content:center;background:white;color:var(--g);border:2px solid var(--g);font-size:27px;font-weight:900;text-decoration:none;transition:transform .2s,opacity .2s}.home-footer-cta .social-icon.shopee-icon{border-color:#ee4d2d}.home-footer-cta .social-icon.lazada-icon{border-color:#ff5a5f}.home-footer-cta .social-icon img{width:42px;height:42px;display:block;object-fit:contain}.social-icon svg{display:block!important;width:40px!important;height:40px!important;min-width:40px;min-height:40px;overflow:visible}.social-icon.facebook-icon span{display:block!important;font-size:48px!important;font-weight:800!important;line-height:1!important;transform:translate(-2px,0);font-family:Arial,Helvetica,sans-serif}.home-footer-cta .instagram-icon{background:linear-gradient(35deg,#ffd600 0%,#ff7a00 24%,#ff0069 52%,#d300c5 72%,#7638fa 88%,#405de6 100%);border-color:transparent;color:white;border-radius:22%}.home-footer-cta .facebook-icon{background:linear-gradient(180deg,#20a4f4 0%,#0866ff 100%);border-color:transparent;color:white;border-radius:22%}.home-footer-cta .social-icon:hover{transform:translateY(-2px);opacity:.85}
 .home-footer-cta .contact-details{margin-top:34px;padding-top:26px;border-top:1px solid #65715b}.home-footer-cta .contact-details h3{margin:0 0 8px;font-size:24px}.home-footer-cta .contact-details a{color:white;text-decoration:underline}
 @media(max-width:700px){body{padding-top:116px}main{padding-top:44px}.nav{min-height:108px!important;padding:8px 12px!important;gap:8px}.logo img{width:86px;height:55px}.links{max-width:calc(100% - 94px);display:flex;flex-wrap:wrap;white-space:normal;justify-content:flex-end;gap:7px 11px;line-height:1.25}}
 @media(max-width:420px){body{padding-top:128px}.nav{min-height:120px!important}.links{gap:7px 9px;font-size:10px}}
@@ -126,6 +126,57 @@ h4, h5, h6 { font-size: 16px !important; line-height: 1.3 !important; }
   h1 { font-size: 40px !important; letter-spacing: -1px !important; }
   h2 { font-size: 23px !important; }
   h3 { font-size: 19px !important; }
+}
+
+
+/* Makhana Reads card styling — explicit final overrides */
+body main section.reading-section .cards {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+  align-items: stretch !important;
+}
+body main section.reading-section article.card {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 0 !important;
+  padding: 22px !important;
+  background: #ffffff !important;
+  border: 1px solid #e8e0c7 !important;
+  border-radius: 18px !important;
+  box-shadow: 0 6px 20px rgba(38,50,29,.06) !important;
+}
+body main section.reading-section article.card .tag {
+  display: block !important;
+  color: #5b8f20 !important;
+  font-size: 11px !important;
+  line-height: 1.4 !important;
+  letter-spacing: 1.2px !important;
+  text-transform: uppercase !important;
+  font-weight: 800 !important;
+  margin: 0 0 10px !important;
+}
+body main section.reading-section article.card h3 {
+  font-size: 19px !important;
+  line-height: 1.3 !important;
+  letter-spacing: 0 !important;
+  margin: 0 0 10px !important;
+}
+body main section.reading-section article.card p {
+  font-size: 14px !important;
+  line-height: 1.55 !important;
+  color: #68705e !important;
+  margin: 0 0 16px !important;
+}
+body main section.reading-section article.card a {
+  color: #5b8f20 !important;
+  font-size: 14px !important;
+  font-weight: 800 !important;
+  margin-top: auto !important;
+}
+@media (max-width: 700px) {
+  body main section.reading-section .cards { grid-template-columns: 1fr !important; }
 }
 
 </style>
